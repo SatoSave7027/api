@@ -1,0 +1,8 @@
+:root {
+  color-scheme: dark;
+}
+
+::selection {
+  background-color: rgba(137, 255, 44, 0.4);
+  color: #051006;
+}

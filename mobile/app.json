@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "SatoSave Vault",
+    "slug": "satosave-vault",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#040806"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.satosave.vault"
+    }
+  }
+}
