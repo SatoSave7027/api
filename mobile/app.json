@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "SatoSave Vault",
+    "slug": "satosave-vault",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "satosave",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#080f08"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.satosave.vault"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#080f08"
+      },
+      "package": "app.satosave.vault"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
