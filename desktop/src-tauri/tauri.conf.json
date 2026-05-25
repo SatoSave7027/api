@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SatoSave Vault",
+  "version": "1.0.0",
+  "identifier": "com.satosave.vault",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      { "title": "SatoSave Vault", "width": 1180, "height": 780, "minWidth": 360, "minHeight": 640 }
+    ],
+    "security": { "csp": null }
+  },
+  "bundle": { "active": true, "targets": ["nsis"] }
+}
