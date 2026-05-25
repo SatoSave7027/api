@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: radial-gradient(
+      1200px 800px at 80% -10%,
+      rgba(34, 211, 238, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 700px at -10% 110%,
+      rgba(57, 255, 136, 0.16),
+      transparent 60%
+    ),
+    #04060a;
+  color: #e6fff7;
+  min-height: 100vh;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(57, 255, 136, 0.35);
+  color: #04060a;
+}
+
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(18, 25, 34, 0.7),
+    rgba(12, 17, 23, 0.55)
+  );
+  border: 1px solid rgba(94, 232, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(57, 255, 136, 0.55),
+    rgba(34, 211, 238, 0.35),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+input,
+textarea,
+button {
+  font-family: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(230, 255, 247, 0.35);
+}

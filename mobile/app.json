@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "name": "SatoSave Vault",
+    "slug": "satosave-vault",
+    "version": "1.0.0",
+    "scheme": "satosave",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#04060a"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.satosave.vault"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#04060a"
+      },
+      "package": "app.satosave.vault",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "SatoSave Vault uses photos to attach avatars and link images."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiBaseUrl": "http://localhost:8000"
+    }
+  }
+}

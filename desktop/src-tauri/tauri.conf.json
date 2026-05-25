@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schema.tauri.app/config/1",
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "SatoSave Vault",
+    "version": "1.0.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "Productivity",
+      "copyright": "© SatoSave Vault",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/icon.png"
+      ],
+      "identifier": "app.satosave.vault",
+      "longDescription": "Encrypted personal vault for notes, contacts and links.",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "Encrypted personal vault",
+      "targets": [
+        "msi",
+        "nsis"
+      ],
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+        "nsis": {
+          "installerIcon": "icons/icon.png"
+        }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 800,
+        "resizable": true,
+        "title": "SatoSave Vault",
+        "width": 1200,
+        "minHeight": 600,
+        "minWidth": 900,
+        "decorations": true
+      }
+    ]
+  }
+}
