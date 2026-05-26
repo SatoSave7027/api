@@ -1,0 +1,25 @@
+{
+  "name": "satosave-vault-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo/AppEntry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "latest",
+    "expo": "latest",
+    "expo-image-picker": "latest",
+    "expo-secure-store": "latest",
+    "react": "latest",
+    "react-native": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@types/react": "latest",
+    "typescript": "latest"
+  }
+}

@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at top left, rgba(103, 255, 106, 0.14), transparent 32rem), radial-gradient(circle at bottom right, rgba(32, 246, 210, 0.16), transparent 32rem), #030706;
+  color: #ecfff8;
+}
+button, input, textarea, select { font: inherit; }
+.glass { border: 1px solid rgba(103, 255, 106, 0.18); background: rgba(7, 17, 15, 0.78); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32); backdrop-filter: blur(18px); }
+.input { width: 100%; border-radius: 1rem; border: 1px solid rgba(32, 246, 210, 0.22); background: rgba(3, 7, 6, 0.76); padding: 0.8rem 1rem; color: #ecfff8; outline: none; transition: border-color 160ms ease, box-shadow 160ms ease; }
+.input:focus { border-color: #20f6d2; box-shadow: 0 0 0 4px rgba(32, 246, 210, 0.12); }
