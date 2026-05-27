@@ -7,7 +7,7 @@ from sqlalchemy import desc, func, select
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
-from app.database import utcnow
+from app.database import ensure_utc, utcnow
 from app.models import OtpChallenge, User, UserSession
 from app.schemas.auth import TokenPair, UserOut
 from app.security.hashing import hmac_hash, verify_hash
@@ -32,7 +32,7 @@ def request_login_code(db: Session, email: str) -> None:
     latest = db.execute(
         select(OtpChallenge).where(OtpChallenge.email == normalized_email).order_by(desc(OtpChallenge.created_at)).limit(1)
     ).scalar_one_or_none()
-    if latest and (now - latest.created_at).total_seconds() < settings.otp_resend_seconds:
+    if latest and (now - ensure_utc(latest.created_at)).total_seconds() < settings.otp_resend_seconds:
         raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail="Please wait before requesting another code")
     hourly_count = db.execute(
         select(func.count(OtpChallenge.id)).where(
@@ -44,6 +44,7 @@ def request_login_code(db: Session, email: str) -> None:
         raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail="Too many OTP requests")
 
     code = _new_otp_code()
+    email_service.send_otp(normalized_email, code)
     challenge = OtpChallenge(
         email=normalized_email,
         code_hash=hmac_hash(f"{normalized_email}:{code}", "otp"),
@@ -51,7 +52,6 @@ def request_login_code(db: Session, email: str) -> None:
     )
     db.add(challenge)
     db.commit()
-    email_service.send_otp(normalized_email, code)
 
 
 def verify_login_code(db: Session, email: str, code: str) -> TokenPair:
@@ -64,7 +64,7 @@ def verify_login_code(db: Session, email: str, code: str) -> TokenPair:
         .order_by(desc(OtpChallenge.created_at))
         .limit(1)
     ).scalar_one_or_none()
-    if challenge is None or challenge.expires_at <= now:
+    if challenge is None or ensure_utc(challenge.expires_at) <= now:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="OTP code is invalid or expired")
     if challenge.attempts >= challenge.max_attempts:
         raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail="Too many invalid OTP attempts")
@@ -102,7 +102,9 @@ def refresh_session(db: Session, refresh_token: str) -> TokenPair:
     session = db.execute(select(UserSession).where(UserSession.refresh_token_hash == hmac_hash(refresh_token, "refresh"))).scalar_one_or_none()
     if session is None or session.revoked_at is not None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
-    if session.expires_at <= now or now - session.last_activity_at > timedelta(hours=settings.session_idle_hours):
+    session_expires_at = ensure_utc(session.expires_at)
+    session_last_activity_at = ensure_utc(session.last_activity_at)
+    if session_expires_at <= now or now - session_last_activity_at > timedelta(hours=settings.session_idle_hours):
         session.revoked_at = now
         db.commit()
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Session expired due to inactivity")
